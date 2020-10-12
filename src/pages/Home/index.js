@@ -6,6 +6,7 @@ import Clock from '../../Components/Clock'
 import numeral from 'numeral'
 import _ from 'lodash'
 
+
 const config = {
     DEFAULT_REMAIN: 30,
     DEFAULT_QUESTION_FIELD: 'answer',
@@ -15,8 +16,8 @@ const config = {
         MAX: 20,
     },
     SOUND: {
-        SUCCESS: '/success_sound.mp3',
-        ERROR: '/error_sound.mp3'
+        SUCCESS: './success_sound.mp3',
+        ERROR: './error_sound.mp3'
     },
 };
 
@@ -35,6 +36,7 @@ const Home = () => {
     const [remain, setRemain] = useState(config.DEFAULT_REMAIN)
 
     const handleStartBtnClick = () => {
+        handleResetBtnClick();
         const startTime = moment();
         setStartTime(startTime)
         setStartTimeStr(startTime.format("hh:mm:ss a"))
@@ -89,6 +91,9 @@ const Home = () => {
     }
 
     const soundPlay = (isSuccess) => {
+        // const errSound = require('../../assets/error_sound.mp3')
+        // const successSound = require('../../assets/success_sound.mp3')
+        // const audio = new Audio(successSound)
         const audio = new Audio(isSuccess ? config.SOUND.SUCCESS : config.SOUND.ERROR).play();
     }
 
@@ -183,24 +188,24 @@ const Home = () => {
             <Row className="body-container" align="middle">
                 <div className="body-content-container">
                     <InputNumber value={left}
-                                 disabled={questionField !== 'left' || !quizIsStarted}
+                                 disabled={!quizIsStarted}
                                  size="large"
-                                 onChange={v => {setLeft(numeral(v).value())}}
+                                 onChange={v => {if(questionField === 'left')setLeft(numeral(v).value())}}
                                  onClick={selectAllWords}
                     />
                     <span className="body-content-operator">{operator}</span>
                     <InputNumber value={right}
-                                 disabled={questionField !== 'right' || !quizIsStarted}
+                                 disabled={!quizIsStarted}
                                  size="large"
                                  onClick={selectAllWords}
-                                 onChange={v => {setRight(numeral(v).value())}}
+                                 onChange={v => {if(questionField === 'right')setRight(numeral(v).value())}}
                     />
                     <span className="body-content-operator">=</span>
                     <InputNumber value={answer}
-                                 disabled={questionField !== 'answer' || !quizIsStarted}
+                                 disabled={!quizIsStarted}
                                  size="large"
                                  onClick={selectAllWords}
-                                 onChange={v => {setAnswer(numeral(v).value())}}
+                                 onChange={v => {if (questionField === 'answer') setAnswer(numeral(v).value())}}
                     />
                     <Button size="large" className="submit-btn" type="primary" disabled={!quizIsStarted} onClick={handleSubmitBtnClick}>Submit</Button>
                 </div>
