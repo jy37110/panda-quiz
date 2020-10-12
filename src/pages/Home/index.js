@@ -7,7 +7,7 @@ import numeral from 'numeral'
 import _ from 'lodash'
 
 const config = {
-    DEFAULT_REMAIN: 5,
+    DEFAULT_REMAIN: 30,
     DEFAULT_QUESTION_FIELD: 'answer',
     DEFAULT_OPERATOR: '+',
     DEFAULT_RANGE: {
