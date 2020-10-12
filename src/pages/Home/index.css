@@ -1,0 +1,57 @@
+.top-bar-status-row {
+    padding: 10px;
+    text-align: left;
+    background-color: #f1f2f2;
+}
+
+.top-bar-function-container {
+    background-color: #f1f2f2;
+    padding: 10px;
+}
+
+.btn-groups {
+    width: 80%
+}
+
+.body-container {
+    margin-top: 10px;
+    background-color: white;
+    text-align: center;
+}
+
+.body-content-container {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.body-content-operator {
+    font-size: 24px;
+    padding: 0 10px;
+}
+
+.footer-container {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f1f2f2;
+    text-align: left;
+}
+
+.submit-btn {
+    margin-left: 20px;
+}
+
+.input-group {
+    height: 30px;
+}
+
+.correct-answer {
+    color: green;
+}
+
+.wrong-answer {
+    color: #ec008c;
+}
+
+.result-content {
+    margin: 0 10px;
+}
