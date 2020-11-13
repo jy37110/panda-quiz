@@ -160,83 +160,82 @@ const Home = () => {
 
     return (
         <div className='app-container'>
-            <h1>Happy Birthday Panda</h1>
-            {/*<Row className='top-bar-status-row' align="middle">*/}
-            {/*    <Col span={3}>*/}
-            {/*        <h3>Panda Quiz</h3>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={6}>*/}
-            {/*        <h4>Start at:<span>{startTimeStr}</span></h4>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={6}>*/}
-            {/*        <h4>End at:<span>{endTimeStr}</span></h4>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={6}>*/}
-            {/*        <h4>Current time:<Clock /></h4>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={3}>*/}
-            {/*        <h4>Remain:<span>{remain}</span></h4>*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
-            {/*<Row className='top-bar-function-container'>*/}
-            {/*    <Col offset={18} span={3}>*/}
-            {/*        <Button className='btn-groups' disabled={quizIsStarted} onClick={handleStartBtnClick}>Start</Button>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={3}>*/}
-            {/*        <Button className='btn-groups' disabled={!quizIsStarted} onClick={handleResetBtnClick}>Reset</Button>*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
-            {/*<Row className="body-container" align="middle">*/}
-            {/*    <div className="body-content-container">*/}
-            {/*        <InputNumber value={left}*/}
-            {/*                     disabled={!quizIsStarted}*/}
-            {/*                     size="large"*/}
-            {/*                     onChange={v => {if(questionField === 'left')setLeft(numeral(v).value())}}*/}
-            {/*                     onClick={selectAllWords}*/}
-            {/*        />*/}
-            {/*        <span className="body-content-operator">{operator}</span>*/}
-            {/*        <InputNumber value={right}*/}
-            {/*                     disabled={!quizIsStarted}*/}
-            {/*                     size="large"*/}
-            {/*                     onClick={selectAllWords}*/}
-            {/*                     onChange={v => {if(questionField === 'right')setRight(numeral(v).value())}}*/}
-            {/*        />*/}
-            {/*        <span className="body-content-operator">=</span>*/}
-            {/*        <InputNumber value={answer}*/}
-            {/*                     disabled={!quizIsStarted}*/}
-            {/*                     size="large"*/}
-            {/*                     onClick={selectAllWords}*/}
-            {/*                     onChange={v => {if (questionField === 'answer') setAnswer(numeral(v).value())}}*/}
-            {/*        />*/}
-            {/*        <Button size="large" className="submit-btn" type="primary" disabled={!quizIsStarted} onClick={handleSubmitBtnClick}>Submit</Button>*/}
-            {/*    </div>*/}
-            {/*</Row>*/}
-            {/*<div className="footer-container">*/}
-            {/*    <h3>*/}
-            {/*        Result:*/}
-            {/*        {remain === 0 &&*/}
-            {/*        <span>*/}
-            {/*            <span className="result-content">Total: {config.DEFAULT_REMAIN}</span>*/}
-            {/*            <span className="result-content">Correct: {resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0)}</span>*/}
-            {/*            <span className="result-content">Wrong: {resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0)}</span>*/}
-            {/*            <span className="result-content">Time Cost: {endTime.diff(startTime, 'minutes')} minutes</span>*/}
-            {/*        </span>}*/}
-            {/*    </h3>*/}
-            {/*    <div className='result-container'>*/}
-            {/*        {*/}
-            {/*            resultArr && resultArr.length > 0 &&*/}
-            {/*            resultArr.map((item, index) => {*/}
-            {/*                return (*/}
-            {/*                    <h3 key={index} className={item.correct ? 'correct-answer' : 'wrong-answer'}>*/}
-            {/*                        {item.question}*/}
-            {/*                        <span style={{marginLeft:10}}>{item.correct ? 'Great' : 'Wrong'}</span>*/}
-            {/*                    </h3>*/}
-            {/*                )*/}
-            {/*            })*/}
-            {/*        }*/}
-            {/*    </div>*/}
+            <Row className='top-bar-status-row' align="middle">
+                <Col span={3}>
+                    <h3>Panda Quiz</h3>
+                </Col>
+                <Col span={6}>
+                    <h4>Start at:<span>{startTimeStr}</span></h4>
+                </Col>
+                <Col span={6}>
+                    <h4>End at:<span>{endTimeStr}</span></h4>
+                </Col>
+                <Col span={6}>
+                    <h4>Current time:<Clock /></h4>
+                </Col>
+                <Col span={3}>
+                    <h4>Remain:<span>{remain}</span></h4>
+                </Col>
+            </Row>
+            <Row className='top-bar-function-container'>
+                <Col offset={18} span={3}>
+                    <Button className='btn-groups' disabled={quizIsStarted} onClick={handleStartBtnClick}>Start</Button>
+                </Col>
+                <Col span={3}>
+                    <Button className='btn-groups' disabled={!quizIsStarted} onClick={handleResetBtnClick}>Reset</Button>
+                </Col>
+            </Row>
+            <Row className="body-container" align="middle">
+                <div className="body-content-container">
+                    <InputNumber value={left}
+                                 disabled={!quizIsStarted}
+                                 size="large"
+                                 onChange={v => {if(questionField === 'left')setLeft(numeral(v).value())}}
+                                 onClick={selectAllWords}
+                    />
+                    <span className="body-content-operator">{operator}</span>
+                    <InputNumber value={right}
+                                 disabled={!quizIsStarted}
+                                 size="large"
+                                 onClick={selectAllWords}
+                                 onChange={v => {if(questionField === 'right')setRight(numeral(v).value())}}
+                    />
+                    <span className="body-content-operator">=</span>
+                    <InputNumber value={answer}
+                                 disabled={!quizIsStarted}
+                                 size="large"
+                                 onClick={selectAllWords}
+                                 onChange={v => {if (questionField === 'answer') setAnswer(numeral(v).value())}}
+                    />
+                    <Button size="large" className="submit-btn" type="primary" disabled={!quizIsStarted} onClick={handleSubmitBtnClick}>Submit</Button>
+                </div>
+            </Row>
+            <div className="footer-container">
+                <h3>
+                    Result:
+                    {remain === 0 &&
+                    <span>
+                        <span className="result-content">Total: {config.DEFAULT_REMAIN}</span>
+                        <span className="result-content">Correct: {resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0)}</span>
+                        <span className="result-content">Wrong: {resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0)}</span>
+                        <span className="result-content">Time Cost: {endTime.diff(startTime, 'minutes')} minutes</span>
+                    </span>}
+                </h3>
+                <div className='result-container'>
+                    {
+                        resultArr && resultArr.length > 0 &&
+                        resultArr.map((item, index) => {
+                            return (
+                                <h3 key={index} className={item.correct ? 'correct-answer' : 'wrong-answer'}>
+                                    {item.question}
+                                    <span style={{marginLeft:10}}>{item.correct ? 'Great' : 'Wrong'}</span>
+                                </h3>
+                            )
+                        })
+                    }
+                </div>
 
-            {/*</div>*/}
+            </div>
         </div>
     )
 }
