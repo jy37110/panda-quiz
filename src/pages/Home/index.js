@@ -5,6 +5,12 @@ import { Row, Col, Button, InputNumber, message } from 'antd'
 import Clock from '../../Components/Clock'
 import numeral from 'numeral'
 import _ from 'lodash'
+import AWS from 'aws-sdk'
+// import Lambda from 'aws-sdk/clients/lambda'
+
+const { LAMBDA_KEY, LAMBDA_SECRET } = process.env
+
+AWS.config.update({accessKeyId: LAMBDA_KEY, secretAccessKey: LAMBDA_SECRET, region: 'us-west-2'})
 
 
 const config = {
@@ -158,6 +164,21 @@ const Home = () => {
         console.log(result)
     }
 
+    const handleDevBtnClick = () => {
+        const params = {
+            FunctionName: 'panda-quiz-submit',
+            Payload: JSON.stringify({ key1: 'value1', key2: 'value2'})
+        }
+        const lambda = new AWS.Lambda();
+        lambda.invoke(params, (err, data) => {
+            if (err) {
+                message.error(err.message)
+            } else {
+                console.log(data)
+            }
+        })
+    }
+
     return (
         <div className='app-container'>
             <Row className='top-bar-status-row' align="middle">
@@ -208,6 +229,8 @@ const Home = () => {
                                  onChange={v => {if (questionField === 'answer') setAnswer(numeral(v).value())}}
                     />
                     <Button size="large" className="submit-btn" type="primary" disabled={!quizIsStarted} onClick={handleSubmitBtnClick}>Submit</Button>
+                    <Button size="large" className="submit-btn" type="primary" onClick={handleDevBtnClick}>Dev</Button>
+
                 </div>
             </Row>
             <div className="footer-container">

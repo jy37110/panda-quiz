@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
+console.log(process.env);
 
 ReactDOM.render(
   <React.StrictMode>
