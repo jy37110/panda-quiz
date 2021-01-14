@@ -51,7 +51,7 @@ const Home = () => {
     }
 
     const populateNextQuestion = () => {
-        if (remain >= 1) {
+        if (remain > 1) {
             const randomNumber = getRandomNumber();
             setLeft(questionField === 'left' ? "" : randomNumber.left);
             setRight(questionField === 'right' ? "" : randomNumber.right);
