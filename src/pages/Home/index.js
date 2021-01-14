@@ -170,9 +170,9 @@ const Home = () => {
             Payload: JSON.stringify({
                 startTime: startTimeStr,
                 endTime: endTimeStr,
-                totalQuiz: config.DEFAULT_REMAIN,
-                correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0),
-                wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0),
+                totalQuiz: config.DEFAULT_REMAIN.toString(),
+                correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0).toString(),
+                wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0).toString(),
                 timeSpend: endTime ? endTime.diff(startTime, 'minutes') : "",
                 quizList: JSON.stringify(resultArr.map(item => {return item.question + " " + (item.correct ? 'correct' : 'wrong')}))
             })
