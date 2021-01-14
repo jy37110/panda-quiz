@@ -167,11 +167,21 @@ const Home = () => {
     const handleDevBtnClick = () => {
         const params = {
             FunctionName: 'panda-quiz-submit',
-            Payload: JSON.stringify({ key1: 'value1', key2: 'value2'})
+            Payload: JSON.stringify({
+                startTime: startTimeStr,
+                endTime: endTimeStr,
+                totalQuiz: config.DEFAULT_REMAIN,
+                correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0),
+                wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0),
+                timeSpend: endTime ? endTime.diff(startTime, 'minutes') : "",
+                quizList: JSON.stringify(resultArr.map(item => {return item.question + " " + (item.correct ? 'correct' : 'wrong')}))
+            })
         }
         const lambda = new AWS.Lambda();
+        console.log(JSON.parse(params.Payload))
         lambda.invoke(params, (err, data) => {
             if (err) {
+                console.log(err.message)
                 message.error(err.message)
             } else {
                 console.log(data)
