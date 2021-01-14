@@ -8,9 +8,9 @@ import _ from 'lodash'
 import AWS from 'aws-sdk'
 // import Lambda from 'aws-sdk/clients/lambda'
 
-const { LAMBDA_KEY, LAMBDA_SECRET } = process.env
+const { REACT_APP_LAMBDA_KEY, REACT_APP_LAMBDA_SECRET } = process.env
 
-AWS.config.update({accessKeyId: LAMBDA_KEY, secretAccessKey: LAMBDA_SECRET, region: 'us-west-2'})
+AWS.config.update({accessKeyId: REACT_APP_LAMBDA_KEY, secretAccessKey: REACT_APP_LAMBDA_SECRET, region: 'us-west-2'})
 
 
 const config = {
