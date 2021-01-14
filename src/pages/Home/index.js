@@ -51,7 +51,7 @@ const Home = () => {
     }
 
     const populateNextQuestion = () => {
-        if (remain > 1) {
+        if (remain >= 1) {
             const randomNumber = getRandomNumber();
             setLeft(questionField === 'left' ? "" : randomNumber.left);
             setRight(questionField === 'right' ? "" : randomNumber.right);
@@ -92,6 +92,7 @@ const Home = () => {
         setEndTime(completeTime)
         setEndTimeStr(completeTime.format("hh:mm:ss a"))
         setQuizIsStarted(false)
+        setRemain(config.DEFAULT_REMAIN)
         let timeDiff = completeTime.diff(startTime, 'minutes', )
         postResult(completeTime.format("hh:mm:ss a"), timeDiff)
         // console.log(timeDiff)
