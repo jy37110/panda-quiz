@@ -174,7 +174,7 @@ const Home = () => {
                 totalQuiz: config.DEFAULT_REMAIN.toString(),
                 correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0).toString(),
                 wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0).toString(),
-                timeSpend: timeSpend.toString(),
+                timeSpend: timeSpend.toString() + " min",
                 quizList: JSON.stringify(resultArr.map(item => {return item.question + " " + (item.correct ? 'correct' : 'wrong')}))
             })
         }
