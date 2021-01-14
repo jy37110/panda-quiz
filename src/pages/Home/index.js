@@ -93,7 +93,7 @@ const Home = () => {
         setEndTimeStr(completeTime.format("hh:mm:ss a"))
         setQuizIsStarted(false)
         let timeDiff = completeTime.diff(startTime, 'minutes', )
-        postResult()
+        postResult(completeTime.format("hh:mm:ss a"), timeDiff)
         // console.log(timeDiff)
     }
 
@@ -165,16 +165,16 @@ const Home = () => {
         console.log(result)
     }
 
-    const postResult = () => {
+    const postResult = (endTimeOnSubmit, timeSpend) => {
         const params = {
             FunctionName: 'panda-quiz-submit',
             Payload: JSON.stringify({
                 startTime: startTimeStr,
-                endTime: endTimeStr,
+                endTime: endTimeOnSubmit,
                 totalQuiz: config.DEFAULT_REMAIN.toString(),
                 correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0).toString(),
                 wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0).toString(),
-                timeSpend: endTime ? endTime.diff(startTime, 'minutes').toString() + " " + "min" : "",
+                timeSpend: timeSpend.toString(),
                 quizList: JSON.stringify(resultArr.map(item => {return item.question + " " + (item.correct ? 'correct' : 'wrong')}))
             })
         }
