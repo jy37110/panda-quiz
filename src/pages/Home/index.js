@@ -93,6 +93,7 @@ const Home = () => {
         setEndTimeStr(completeTime.format("hh:mm:ss a"))
         setQuizIsStarted(false)
         let timeDiff = completeTime.diff(startTime, 'minutes', )
+        postResult()
         // console.log(timeDiff)
     }
 
@@ -164,7 +165,7 @@ const Home = () => {
         console.log(result)
     }
 
-    const handleDevBtnClick = () => {
+    const postResult = () => {
         const params = {
             FunctionName: 'panda-quiz-submit',
             Payload: JSON.stringify({
@@ -173,7 +174,7 @@ const Home = () => {
                 totalQuiz: config.DEFAULT_REMAIN.toString(),
                 correct: resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0).toString(),
                 wrong: resultArr.reduce((acc, cur) => acc + (cur.correct === false ? 1 : 0), 0).toString(),
-                timeSpend: endTime ? endTime.diff(startTime, 'minutes') : "",
+                timeSpend: endTime ? endTime.diff(startTime, 'minutes').toString() + " " + "min" : "",
                 quizList: JSON.stringify(resultArr.map(item => {return item.question + " " + (item.correct ? 'correct' : 'wrong')}))
             })
         }
@@ -239,7 +240,7 @@ const Home = () => {
                                  onChange={v => {if (questionField === 'answer') setAnswer(numeral(v).value())}}
                     />
                     <Button size="large" className="submit-btn" type="primary" disabled={!quizIsStarted} onClick={handleSubmitBtnClick}>Submit</Button>
-                    <Button size="large" className="submit-btn" type="primary" onClick={handleDevBtnClick}>Dev</Button>
+                    {/*<Button size="large" className="submit-btn" type="primary" onClick={handleDevBtnClick}>Dev</Button>*/}
 
                 </div>
             </Row>
