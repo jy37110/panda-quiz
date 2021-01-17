@@ -19,7 +19,7 @@ const config = {
     DEFAULT_OPERATOR: '+',
     DEFAULT_RANGE: {
         MIN: 0,
-        MAX: 20,
+        MAX: 30,
     },
     SOUND: {
         SUCCESS: './success_sound.mp3',
@@ -47,12 +47,15 @@ const Home = () => {
         setStartTime(startTime)
         setStartTimeStr(startTime.format("hh:mm:ss a"))
         setQuizIsStarted(true)
-        populateNextQuestion();
+        populateNextQuestion(remain);
     }
 
-    const populateNextQuestion = () => {
-        if (remain > 1) {
-            const randomNumber = getRandomNumber();
+    const populateNextQuestion = (updatedRemain) => {
+
+        if (updatedRemain > 0) {
+            const rollOperator = _.random(0, 1) === 0 ? "+" : "-"
+            setOperator(rollOperator);
+            const randomNumber = getRandomNumber(rollOperator);
             setLeft(questionField === 'left' ? "" : randomNumber.left);
             setRight(questionField === 'right' ? "" : randomNumber.right);
             setAnswer(questionField === 'answer' ? "" : randomNumber.answer);
@@ -61,8 +64,8 @@ const Home = () => {
         }
     }
 
-    const getRandomNumber = () => {
-        switch(operator) {
+    const getRandomNumber = (rollOperator) => {
+        switch(rollOperator) {
             case "+":
                 return {left: getHalfRandom(), right: getHalfRandom(), answer: getRandom()}
             case "-":
@@ -95,15 +98,15 @@ const Home = () => {
         setRemain(config.DEFAULT_REMAIN)
         let timeDiff = completeTime.diff(startTime, 'minutes', )
         postResult(completeTime.format("hh:mm:ss a"), timeDiff)
-        // console.log(timeDiff)
+        console.log(timeDiff)
     }
 
-    const soundPlay = (isSuccess) => {
-        // const errSound = require('../../assets/error_sound.mp3')
-        // const successSound = require('../../assets/success_sound.mp3')
-        // const audio = new Audio(successSound)
-        const audio = new Audio(isSuccess ? config.SOUND.SUCCESS : config.SOUND.ERROR).play();
-    }
+    // const soundPlay = (isSuccess) => {
+    //     // const errSound = require('../../assets/error_sound.mp3')
+    //     // const successSound = require('../../assets/success_sound.mp3')
+    //     // const audio = new Audio(successSound)
+    //     const audio = new Audio(isSuccess ? config.SOUND.SUCCESS : config.SOUND.ERROR).play();
+    // }
 
     const handleResetBtnClick = () => {
         setOperator(config.DEFAULT_OPERATOR);
@@ -160,10 +163,9 @@ const Home = () => {
         })
         setResultArr(result)
         setRemain(remain - 1)
-        soundPlay(answerIsCorrect)
-
-        populateNextQuestion();
-        console.log(result)
+        const updatedRemain = remain - 1
+        // soundPlay(answerIsCorrect)
+        populateNextQuestion(updatedRemain);
     }
 
     const postResult = (endTimeOnSubmit, timeSpend) => {
@@ -248,7 +250,7 @@ const Home = () => {
             <div className="footer-container">
                 <h3>
                     Result:
-                    {remain === 0 &&
+                    {remain === config.DEFAULT_REMAIN && !!endTime &&
                     <span>
                         <span className="result-content">Total: {config.DEFAULT_REMAIN}</span>
                         <span className="result-content">Correct: {resultArr.reduce((acc, cur) => acc + (cur.correct === true ? 1 : 0), 0)}</span>
