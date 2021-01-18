@@ -158,7 +158,7 @@ const Home = () => {
         let result = _.cloneDeep(resultArr);
         let answerIsCorrect = checkAnswer();
         result.push({
-            question: `${left} + ${right} = ${answer}`,
+            question: `${left} ${operator} ${right} = ${answer}`,
             correct: answerIsCorrect
         })
         setResultArr(result)
