@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 import './index.css'
 import { Row, Col, Button, InputNumber, message } from 'antd'
@@ -87,6 +87,11 @@ const Home = () => {
 
     const getRandom = () => _.random(config.DEFAULT_RANGE.MIN, config.DEFAULT_RANGE.MAX)
 
+    useEffect(() => {
+        if (resultArr.length === config.DEFAULT_REMAIN) {
+           postResult()
+        }
+    }, [endTime])
 
     const getHalfRandom = () => _.random(config.DEFAULT_RANGE.MIN, config.DEFAULT_RANGE.MAX / 2)
 
@@ -96,9 +101,9 @@ const Home = () => {
         setEndTimeStr(completeTime.format("hh:mm:ss a"))
         setQuizIsStarted(false)
         setRemain(config.DEFAULT_REMAIN)
-        let timeDiff = completeTime.diff(startTime, 'minutes', )
-        postResult(completeTime.format("hh:mm:ss a"), timeDiff)
-        console.log(timeDiff)
+        // let timeDiff = completeTime.diff(startTime, 'minutes', )
+        // postResult(completeTime.format("hh:mm:ss a"), timeDiff)
+        // console.log(timeDiff)
     }
 
     // const soundPlay = (isSuccess) => {
@@ -168,7 +173,11 @@ const Home = () => {
         populateNextQuestion(updatedRemain);
     }
 
-    const postResult = (endTimeOnSubmit, timeSpend) => {
+    const postResult = () => {
+        const completeTime = moment()
+        let timeSpend = completeTime.diff(startTime, 'minutes', )
+        const endTimeOnSubmit = completeTime.format("hh:mm:ss a")
+
         const params = {
             FunctionName: 'panda-quiz-submit',
             Payload: JSON.stringify({
@@ -182,7 +191,7 @@ const Home = () => {
             })
         }
         const lambda = new AWS.Lambda();
-        console.log(JSON.parse(params.Payload))
+        // console.log(JSON.parse(params.Payload))
         lambda.invoke(params, (err, data) => {
             if (err) {
                 console.log(err.message)
