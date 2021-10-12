@@ -1,0 +1,12 @@
+@import "../../lib.scss";
+
+.holiday-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 3rem;
+    color: $holiday-color;
+  }
+}

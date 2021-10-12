@@ -1,0 +1,42 @@
+@import "../../lib.scss";
+
+.quiz-header-container {
+  background-color: $header-color;
+  height: 70px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 30px;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  flex: 2;
+  text-align: left;
+}
+
+.bar-item-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  font-weight: bold;
+  padding: 0 30px;
+  font-size: 1.1rem;
+}
+
+.green-field {
+  color: green;
+}
+
+.red-field {
+  color: $error-color;
+}
+
+.normal-field {
+  color: white;
+}

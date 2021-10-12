@@ -1,5 +1,12 @@
+@import "./lib.scss";
+
 .App {
   text-align: center;
+  height: 100%;
+  background-color: $bg-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*.App-logo {*/

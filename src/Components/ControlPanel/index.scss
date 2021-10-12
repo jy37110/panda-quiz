@@ -1,0 +1,49 @@
+.control-panel-container {
+  position: relative;
+  flex-basis: 480px;
+  max-width: 480px;
+}
+
+.fixed-panel-wrapper {
+  position: fixed;
+  max-width: inherit;
+  width: 100%;
+}
+
+.control-panel {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  padding: 15px 15px;
+  background-color: white;
+  margin: 30px 30px 30px 0;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.number-pad-item {
+  background-color: lightblue;
+  border-radius: 20px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: green;
+  font-size: 5rem;
+  font-weight: 600;
+  margin: 5px;
+}
+
+.single {
+  width: 125px;
+}
+
+.double {
+  width: 280px;
+}
+
+.full {
+  width: 100%;
+}
