@@ -4,8 +4,12 @@ import _ from "lodash";
 import { Constant } from "./Constant";
 
 export const configExtractor = (data: any): Config => {
+  const numbOfOperators = data.num_of_operatiors?.S
+    ? data.num_of_operatiors.split(",").map((item) => Number(item))
+    : [15, 15];
+  const amount = numbOfOperators.reduce((pre, cur) => pre + cur, [0]);
   return {
-    quizAmount: data.quiz_amount?.N ? numeral(data.quiz_amount.N).value() : 30,
+    quizAmount: amount ? amount : 30,
     isHoliday: data.holiday?.BOOL ? data.holiday.BOOL : false,
     holidayInfo: data.holiday_info?.S
       ? data.holiday_info.S
@@ -23,28 +27,36 @@ export const configExtractor = (data: any): Config => {
     mulDivRange: data.mul_div_range?.N
       ? numeral(data.mul_div_range.N).value()
       : 10,
+    numOfOperators: numbOfOperators,
   };
 };
 
 export const generateQuestions = (config: Config): Question[] => {
   let questions: Question[] = [];
-  for (let i = 0; i < config.quizAmount; i++) {
-    const operator = config.operators[_.random(0, config.operators.length - 1)];
-    switch (operator) {
-      case "+":
-        questions.push(generateAddition(config.addSubRange));
-        break;
-      case "-":
-        questions.push(generateSubtraction(config.addSubRange));
-        break;
-      case "*":
-        questions.push(generateMultiplication(config.mulDivRange));
-        break;
-      case "/":
-        questions.push(generateDivision(config.mulDivRange));
-        break;
-      default:
-        throw new Error(`${Constant.ERROR_PREFIX} unknown operator`);
+  for (
+    let operatorIndex = 0;
+    operatorIndex < config.numOfOperators.length;
+    operatorIndex++
+  ) {
+    const operator = config.operators[operatorIndex];
+    const amount = config.numOfOperators[operatorIndex];
+    for (let i = 0; i < amount; i++) {
+      switch (operator) {
+        case "+":
+          questions.push(generateAddition(config.addSubRange));
+          break;
+        case "-":
+          questions.push(generateSubtraction(config.addSubRange));
+          break;
+        case "*":
+          questions.push(generateMultiplication(config.mulDivRange));
+          break;
+        case "/":
+          questions.push(generateDivision(config.mulDivRange));
+          break;
+        default:
+          throw new Error(`${Constant.ERROR_PREFIX} unknown operator`);
+      }
     }
   }
   if (questions.length > 0) {

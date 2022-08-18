@@ -30,6 +30,7 @@ export interface Config {
   addSubRange: number;
   mulDivRange: number;
   holidayInfo: String;
+  numOfOperators: number[];
 }
 
 export interface Question {
