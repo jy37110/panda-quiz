@@ -16,13 +16,13 @@
     "aws-sdk": "^2.827.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
-    "node-sass": "^7.0.1",
     "numeral": "^2.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.5",
     "react-scripts": "^4.0.3",
-    "redux": "^4.1.1"
+    "redux": "^4.1.1",
+    "sass": "^1.54.4"
   },
   "scripts": {
     "start": "PORT=2000 react-scripts start",
