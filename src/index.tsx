@@ -7,8 +7,6 @@ import "antd/dist/antd.css";
 import { Provider } from "react-redux";
 import store from "./Store/store";
 
-console.log(process.env);
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
