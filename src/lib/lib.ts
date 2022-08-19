@@ -7,7 +7,7 @@ export const configExtractor = (data: any): Config => {
   const numbOfOperators = data.num_of_operatiors?.S
     ? data.num_of_operatiors.S.split(",").map((item) => Number(item))
     : [15, 15];
-  const amount = numbOfOperators.reduce((pre, cur) => pre + cur, [0]);
+  const amount = numbOfOperators.reduce((pre, cur) => pre + cur, 0);
   return {
     quizAmount: amount ? amount : 30,
     isHoliday: data.holiday?.BOOL ? data.holiday.BOOL : false,
