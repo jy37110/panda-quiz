@@ -62,7 +62,7 @@ export const generateQuestions = (config: Config): Question[] => {
   if (questions.length > 0) {
     questions[0].isActive = true;
   }
-  return questions;
+  return questions.sort(() => Math.random() - 0.5);
 };
 
 const generateAddition = (range: number): Question => {
